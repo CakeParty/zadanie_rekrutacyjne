@@ -1,0 +1,23 @@
+---
+compiled_package_info:
+  package_name: Program
+  address_alias_instantiation:
+    AptosFramework: "0000000000000000000000000000000000000000000000000000000000000001"
+    CoreResources: 000000000000000000000000000000000000000000000000000000000a550c18
+    Program: 9e9670e5cdb3a8de8ee10dda802d5914f3a7b8e228a0fdb11a2e6df09b738f21
+    Std: "0000000000000000000000000000000000000000000000000000000000000001"
+    VMReserved: "0000000000000000000000000000000000000000000000000000000000000000"
+  source_digest: FF4DDF745E58853462D0AE97BB837040AA571DCB37B9507A7EF92BB2E1B38B63
+  build_flags:
+    dev_mode: false
+    test_mode: false
+    generate_docs: true
+    generate_abis: true
+    install_dir: ~
+    force_recompilation: false
+    additional_named_addresses:
+      Program: 9e9670e5cdb3a8de8ee10dda802d5914f3a7b8e228a0fdb11a2e6df09b738f21
+    architecture: ~
+dependencies:
+  - AptosFramework
+  - MoveStdlib
