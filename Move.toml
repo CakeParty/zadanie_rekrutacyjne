@@ -6,4 +6,4 @@ version = "0.0.0"
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev = "main" }
 
 [addresses]
-
+Program = "8cce57225975802b624506c49449c8213e09c107853e2bb197664a3f1be13a1b"

@@ -4,19 +4,19 @@ compiled_package_info:
   address_alias_instantiation:
     AptosFramework: "0000000000000000000000000000000000000000000000000000000000000001"
     CoreResources: 000000000000000000000000000000000000000000000000000000000a550c18
-    Program: 9e9670e5cdb3a8de8ee10dda802d5914f3a7b8e228a0fdb11a2e6df09b738f21
+    Program: 8cce57225975802b624506c49449c8213e09c107853e2bb197664a3f1be13a1b
     Std: "0000000000000000000000000000000000000000000000000000000000000001"
     VMReserved: "0000000000000000000000000000000000000000000000000000000000000000"
-  source_digest: FF4DDF745E58853462D0AE97BB837040AA571DCB37B9507A7EF92BB2E1B38B63
+  source_digest: 77FA3A5CB967845EE5A2A22D027D8B2312DBD25B93B780A4C4092D0ACE51CF61
   build_flags:
     dev_mode: false
     test_mode: false
     generate_docs: true
-    generate_abis: true
+    generate_abis: false
     install_dir: ~
     force_recompilation: false
     additional_named_addresses:
-      Program: 9e9670e5cdb3a8de8ee10dda802d5914f3a7b8e228a0fdb11a2e6df09b738f21
+      Program: 8cce57225975802b624506c49449c8213e09c107853e2bb197664a3f1be13a1b
     architecture: ~
 dependencies:
   - AptosFramework

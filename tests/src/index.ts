@@ -10,21 +10,25 @@ import {
   RawTransaction,
   TransactionPayloadScriptFunction,
 } from "aptos/dist/transaction_builder/aptos_types";
+
 const NODE_URL = "https://fullnode.devnet.aptoslabs.com";
 const FAUCET_URL = "https://faucet.devnet.aptoslabs.com";
 const address =
-  "0x9e9670e5cdb3a8de8ee10dda802d5914f3a7b8e228a0fdb11a2e6df09b738f21";
+  "8cce57225975802b624506c49449c8213e09c107853e2bb197664a3f1be13a1b";
 
 const main = async () => {
   const aptosClient = new AptosClient(NODE_URL);
   const faucetClient = new FaucetClient(NODE_URL, FAUCET_URL);
-  const aptosAccount = new AptosAccount();
+  const aptosAccount = new AptosAccount(Buffer.from('0xf9003b8f0ec3d1f041e5c56d3a83bba176dd48242d423c195e47b852bb83173a'));
+  
+  await faucetClient.fundAccount(aptosAccount.address().hex(), 5000);
 
   const [{ sequence_number: sequnceNumber }, chainId] = await Promise.all([
     aptosClient.getAccount(aptosAccount.address()),
     aptosClient.getChainId(),
   ]);
 
+  //publish_module(aptosClient, aptosAccount);
   //init(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_kolekcji_b', sequnceNumber, chainId);
   //deposit_token(aptosClient, aptosAccount, 'nazwa_kolekcji', 'nazwa_tokena', aptosAccount, sequnceNumber, chainId);
   //withdraw_token(aptosClient, aptosAccount, 'nazwa_kolekcji', 'nazwa_tokena', aptosAccount, sequnceNumber, chainId);
@@ -53,6 +57,23 @@ const init = async (
   let res = await client.submitTransaction(signedTrans);
   return res;
 };
+
+const publish_module =  async (
+  client: AptosClient,
+  account: AptosAccount, 
+): Promise<PendingTransaction> => {
+    let payload: TransactionPayload = {
+      type: "module_bundle_payload",
+      modules: [{ bytecode: address }],
+    };
+    let transaction = await client.generateTransaction(
+      account.address(),
+      payload
+    );
+    let signedTrans = await client.signTransaction(account, transaction);
+    let res = await client.submitTransaction(signedTrans);
+    return res;
+}
 
 const deposit_token = async (
   client: AptosClient,

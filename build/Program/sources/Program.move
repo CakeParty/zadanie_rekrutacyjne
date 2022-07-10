@@ -47,6 +47,11 @@ module Program::Program {
         Token {id, value}
     }
 
+    public(script) fun init(account: &signer, collection_a: vector<u8>, collection_b: vector<u8>){
+        init_user(account);
+        init_Program(account, collection_a, collection_b);
+    }
+
     public fun init_user(account: &signer) {
         if (!exists<User>(Signer::address_of(account))) {
             move_to(account, User {token_a: 0, token_b: 0});
@@ -59,7 +64,7 @@ module Program::Program {
         }
     }
 
-    public fun deposit_token(
+    public(script) fun deposit_token(
         account: &signer,
         creator: address,
         collection_name: vector<u8>,
@@ -123,7 +128,7 @@ module Program::Program {
         };
     }
 
-    public fun withdraw_token(
+    public(script) fun withdraw_token(
         account_addr: address,
         creator: address,
         collection_name: vector<u8>,
@@ -186,13 +191,17 @@ module Program::Program {
         }
     }
 
-    public fun swap(
+    public(script) fun swap_tokens(
         account: &signer,
         creator: address,
+        collection_deposit_name: vector<u8>,
+        deposit_name: vector<u8>,
+        program_address: address,
+        account_addr: address,
         collection_name: vector<u8>,
         name: vector<u8>,
-        program_address: address,
     ) acquires User, Program {
-        deposit_token(account, creator, collection_name, name, program_address);
+        deposit_token(account, creator, collection_deposit_name, deposit_name, program_address);
+        withdraw_token(account_addr, creator, collection_name, name, program_address);
     }
 }
