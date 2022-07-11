@@ -29,7 +29,8 @@ const main = async () => {
   ]);
 
   //publish_module(aptosClient, aptosAccount);
-  //init(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_kolekcji_b', sequnceNumber, chainId);
+  //const initresp = await init(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_kolekcji_b', sequnceNumber, chainId);
+  //console.log(initresp.hash);
   //deposit_token(aptosClient, aptosAccount, 'nazwa_kolekcji', 'nazwa_tokena', aptosAccount, sequnceNumber, chainId);
   //withdraw_token(aptosClient, aptosAccount, 'nazwa_kolekcji', 'nazwa_tokena', aptosAccount, sequnceNumber, chainId);
   //swap_tokens(aptosClient, aptosAccount, 'nazwa_kolekcji_do_depozytu', 'nazwa_tokena_do_depozytu', aptosAccount, 'nazwa_kolekcji_do_wycigniecia', 'nazwa_tokena_do_wycigniecia', sequnceNumber, chainId);

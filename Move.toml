@@ -4,6 +4,7 @@ version = "0.0.0"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev = "main" }
+MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib/", rev = "main"}
 
 [addresses]
-Program = "8cce57225975802b624506c49449c8213e09c107853e2bb197664a3f1be13a1b"
+Program = "3fbc86befb863ed90af090341108898080997da0384bbb809df3237a74d79e12"

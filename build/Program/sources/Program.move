@@ -4,9 +4,6 @@ module Program::Program {
     use 0x1::Token::{Self, TokenId};
     use 0x1::IterableTable::{Self, IterableTable};
 
-    native public fun length<Token>(v: &vector<Token>): u64;
-    native public fun borrow<Token>(v: &vector<Token>, i: u64): &Token;
-
     const INVALID_STATE: u64 = 1;
     const REQUIRES_ADDRESS: u64 = 2;
     const REQUIRES_ROLE: u64 = 3;
