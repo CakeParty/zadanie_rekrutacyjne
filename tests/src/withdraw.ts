@@ -3,7 +3,6 @@ import {
   Address,
   PendingTransaction,
   TransactionPayload,
-  Uint64,
 } from "aptos/dist/api/data-contracts";
 import {
   AccountAddress,
@@ -29,12 +28,12 @@ const main = async () => {
     aptosClient.getChainId(),
   ]);
 
-  const resp = await deposit_token(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_tokena_test_2', sequnceNumber, chainId);
+  const resp = await withdraw_token(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_tokena_test_2', sequnceNumber, chainId);
   console.log(resp.hash);
   
 };
 
-const deposit_token = async (
+const withdraw_token = async (
   client: AptosClient,
   account: AptosAccount,
   collection_name: string,
@@ -44,7 +43,7 @@ const deposit_token = async (
 ): Promise<PendingTransaction> => {
   let payload: TransactionPayload = {
     type: "script_function_payload",
-    function: `${address}::Program::deposit_token`,
+    function: `${address}::Program::withdraw_token`,
     type_arguments: [],
     arguments: [
       account.address().hex(),

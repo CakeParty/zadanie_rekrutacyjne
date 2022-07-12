@@ -6,7 +6,8 @@
   "scripts": {
     "deploy": "ts-node src/deploy.ts",
     "init": "ts-node src/init.ts",
-    "deposit": "ts-node src/deposit.ts"
+    "deposit": "ts-node src/deposit.ts",
+    "withdraw": "ts-node src/withdraw.ts"
   },
   "author": "",
   "license": "ISC",

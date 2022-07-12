@@ -7,4 +7,4 @@ AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir 
 MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib/", rev = "main"}
 
 [addresses]
-Program = "25043d63b41c314e7f5421226ab99afbc7fc701ff5d350400ad49cd908de27f6"
+Program = "8c55edbaace95e646e822fcd0d8366b9a42c19c39af9db96e0c9d9096ea6e957"

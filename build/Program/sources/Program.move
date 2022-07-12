@@ -99,7 +99,7 @@ module Program::Program {
         if (token_exists.collection_a == collection_name){
 
             assert!(
-                user_tokens.token_a == 0,
+                user_tokens.token_a >= 1,
                 Errors::requires_capability(REQUIRES_CAPABILITY),
             );
 
@@ -111,7 +111,7 @@ module Program::Program {
             
         } else {
             assert!(
-                user_tokens.token_b == 0,
+                user_tokens.token_b >= 1,
                 Errors::requires_capability(REQUIRES_CAPABILITY),
             );
 
@@ -124,11 +124,12 @@ module Program::Program {
     }
 
     public(script) fun withdraw_token(
-        account_addr: address,
+        account: &signer,
         creator: address,
         collection_name: vector<u8>,
         name: vector<u8>,
     ) acquires User, Program {
+        let account_addr = Signer::address_of(account);
         deposit_to_user(account_addr, creator, collection_name, name);
     }
 
@@ -151,7 +152,7 @@ module Program::Program {
         let token_exists = borrow_global_mut<Program>(account_addr);
 
         assert!(
-            token_exists.collection_a != collection_name && token_exists.collection_b != collection_name,
+            token_exists.collection_a != collection_name || token_exists.collection_b != collection_name,
             Errors::invalid_argument(INVALID_ARGUMENT),
         );
 
@@ -189,11 +190,10 @@ module Program::Program {
         creator: address,
         collection_deposit_name: vector<u8>,
         deposit_name: vector<u8>,
-        account_addr: address,
         collection_name: vector<u8>,
         name: vector<u8>,
     ) acquires User, Program {
         deposit_token(account, creator, collection_deposit_name, deposit_name);
-        withdraw_token(account_addr, creator, collection_name, name);
+        withdraw_token(account, creator, collection_name, name);
     }
 }

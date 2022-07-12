@@ -14,12 +14,12 @@ import {
 const NODE_URL = "https://fullnode.devnet.aptoslabs.com";
 const FAUCET_URL = "https://faucet.devnet.aptoslabs.com";
 const address =
-  "25043d63b41c314e7f5421226ab99afbc7fc701ff5d350400ad49cd908de27f6";
+  "8c55edbaace95e646e822fcd0d8366b9a42c19c39af9db96e0c9d9096ea6e957";
 
 const main = async () => {
   const aptosClient = new AptosClient(NODE_URL);
   const faucetClient = new FaucetClient(NODE_URL, FAUCET_URL);
-  const aptosAccount = new AptosAccount(Buffer.from('0x047b45edcb680004a8dd8e5a83ee8649b78711a860a9dfdae4cc531d281179f6'));
+  const aptosAccount = new AptosAccount(Buffer.from('0x292e0fd9543618f24793d2e49613378103eb6c0b0fe771a35cdaddebf8df3d27'));
   
   await faucetClient.fundAccount(aptosAccount.address().hex(), 5000);
 
