@@ -7,7 +7,8 @@
     "deploy": "ts-node src/deploy.ts",
     "init": "ts-node src/init.ts",
     "deposit": "ts-node src/deposit.ts",
-    "withdraw": "ts-node src/withdraw.ts"
+    "withdraw": "ts-node src/withdraw.ts",
+    "swap": "ts-node src/swap.ts"
   },
   "author": "",
   "license": "ISC",

@@ -3,7 +3,6 @@ import {
   Address,
   PendingTransaction,
   TransactionPayload,
-  Uint64,
 } from "aptos/dist/api/data-contracts";
 import {
   AccountAddress,
@@ -29,14 +28,16 @@ const main = async () => {
     aptosClient.getChainId(),
   ]);
 
-  const resp = await deposit_token(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_tokena_test_2', sequnceNumber, chainId);
+  const resp = await swap_tokens(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_tokena_test_3', 'nazwa_kolekcji_a', 'nazwa_tokena_test_2', sequnceNumber, chainId);
   console.log(resp.hash);
   
 };
 
-const deposit_token = async (
+const swap_tokens = async (
   client: AptosClient,
   account: AptosAccount,
+  collection_deposit_name: string,
+  deposit_name: string,
   collection_name: string,
   name: string,
   sequence_number: string,
@@ -44,10 +45,12 @@ const deposit_token = async (
 ): Promise<PendingTransaction> => {
   let payload: TransactionPayload = {
     type: "script_function_payload",
-    function: `${address}::Program::deposit_token`,
+    function: `${address}::Program::swap_tokens`,
     type_arguments: [],
     arguments: [
       account.address().hex(),
+      Buffer.from(collection_deposit_name).toString("hex"),
+      Buffer.from(deposit_name).toString("hex"),
       Buffer.from(collection_name).toString("hex"),
       Buffer.from(name).toString("hex"),
     ],
