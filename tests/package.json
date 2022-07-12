@@ -5,7 +5,8 @@
  
   "scripts": {
     "deploy": "ts-node src/deploy.ts",
-    "init": "ts-node src/init.ts"
+    "init": "ts-node src/init.ts",
+    "deposit": "ts-node src/deposit.ts"
   },
   "author": "",
   "license": "ISC",

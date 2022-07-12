@@ -1,8 +1,9 @@
-import { AptosAccount, AptosClient, FaucetClient, HexString } from "aptos";
+import { AptosAccount, AptosClient, FaucetClient } from "aptos";
 import {
   Address,
   PendingTransaction,
   TransactionPayload,
+  Uint64,
 } from "aptos/dist/api/data-contracts";
 import {
   AccountAddress,
@@ -28,23 +29,28 @@ const main = async () => {
     aptosClient.getChainId(),
   ]);
 
-  const resp = await init(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_kolekcji_b', sequnceNumber, chainId);
+  const resp = await deposit_token(aptosClient, aptosAccount, 'nazwa_kolekcji_a', 'nazwa_tokena_test', sequnceNumber, chainId);
   console.log(resp.hash);
+  
 };
 
-const init = async (
+const deposit_token = async (
   client: AptosClient,
   account: AptosAccount,
-  collection_a: string,
-  collection_b: string,
+  collection_name: string,
+  name: string,
   sequence_number: string,
   chainId: number
 ): Promise<PendingTransaction> => {
   let payload: TransactionPayload = {
     type: "script_function_payload",
-    function: `${address}::Program::init`,
+    function: `${address}::Program::deposit_token`,
     type_arguments: [],
-    arguments: [Buffer.from(collection_a).toString("hex"), Buffer.from(collection_b).toString("hex")],
+    arguments: [
+      account.address().hex(),
+      Buffer.from(collection_name).toString("hex"),
+      Buffer.from(name).toString("hex"),
+    ],
   };
   let transaction = await client.generateTransaction(
     account.address(),

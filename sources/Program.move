@@ -51,7 +51,7 @@ module Program::Program {
 
     public fun init_user(account: &signer) {
         if (!exists<User>(Signer::address_of(account))) {
-            move_to(account, User {token_a: 0, token_b: 0});
+            move_to(account, User {token_a: 10, token_b: 10});
         }
     }
 
@@ -66,10 +66,9 @@ module Program::Program {
         creator: address,
         collection_name: vector<u8>,
         name: vector<u8>,
-        program_address: address,
     ) acquires User, Program {
         let account_addr = Signer::address_of(account);
-        withdraw_from_user(account_addr, creator, collection_name, name, program_address);
+        withdraw_from_user(account_addr, creator, collection_name, name);
     }
 
     fun withdraw_from_user(
@@ -77,7 +76,6 @@ module Program::Program {
         creator: address,
         collection_name: vector<u8>,
         name: vector<u8>,
-        program_address: address,
     ) acquires User, Program {
         assert!(
             exists<User>(account_addr),
@@ -85,14 +83,14 @@ module Program::Program {
         );
 
         assert!(
-            exists<Program>(program_address),
+            exists<Program>(account_addr),
             Errors::not_published(NOT_PUBLISHED),
         );
-
-        let token_exists = borrow_global_mut<Program>(program_address);
+        
+        let token_exists = borrow_global_mut<Program>(account_addr);
 
         assert!(
-            token_exists.collection_a != collection_name && token_exists.collection_b != collection_name,
+            token_exists.collection_a != collection_name || token_exists.collection_b != collection_name,
             Errors::invalid_argument(INVALID_ARGUMENT),
         );
 
@@ -130,9 +128,8 @@ module Program::Program {
         creator: address,
         collection_name: vector<u8>,
         name: vector<u8>,
-        program_address: address,
     ) acquires User, Program {
-        deposit_to_user(account_addr, creator, collection_name, name, program_address);
+        deposit_to_user(account_addr, creator, collection_name, name);
     }
 
     fun deposit_to_user(
@@ -140,7 +137,6 @@ module Program::Program {
         creator: address,
         collection_name: vector<u8>,
         name: vector<u8>,
-        program_address: address,
     ) acquires User, Program {
         assert!(
             exists<User>(account_addr),
@@ -148,11 +144,11 @@ module Program::Program {
         );
 
         assert!(
-            exists<Program>(program_address),
+            exists<Program>(account_addr),
             Errors::not_published(NOT_PUBLISHED),
         );
 
-        let token_exists = borrow_global_mut<Program>(program_address);
+        let token_exists = borrow_global_mut<Program>(account_addr);
 
         assert!(
             token_exists.collection_a != collection_name && token_exists.collection_b != collection_name,
@@ -193,12 +189,11 @@ module Program::Program {
         creator: address,
         collection_deposit_name: vector<u8>,
         deposit_name: vector<u8>,
-        program_address: address,
         account_addr: address,
         collection_name: vector<u8>,
         name: vector<u8>,
     ) acquires User, Program {
-        deposit_token(account, creator, collection_deposit_name, deposit_name, program_address);
-        withdraw_token(account_addr, creator, collection_name, name, program_address);
+        deposit_token(account, creator, collection_deposit_name, deposit_name);
+        withdraw_token(account_addr, creator, collection_name, name);
     }
 }
